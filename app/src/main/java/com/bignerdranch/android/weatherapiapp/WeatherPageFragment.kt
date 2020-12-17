@@ -7,6 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.bignerdranch.android.weatherapiapp.model.Weather
+import com.bignerdranch.android.weatherapiapp.network.WeatherInterface
+import com.bignerdranch.android.weatherapiapp.viewmodel.WeatherViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,7 +26,8 @@ private const val API_KEY = "843eaebc6a294b4593b190359201612"
 
 
 class WeatherPageFragment : Fragment() {
-    lateinit var weather: Weather
+    private lateinit var  weatherViewModel: WeatherViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,60 +35,13 @@ class WeatherPageFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_weather_page, container, false)
 
+        weatherViewModel= ViewModelProvider(this).get(WeatherViewModel::class.java)
 
-        /*
-                val restaurants = mutableListOf<YelpRestaurant>()
-        val adapter = RestaurantsAdapter(this, restaurants)
-        rvRestaurants.adapter = adapter
-        rvRestaurants.layoutManager = LinearLayoutManager(this)
-
-        val retrofit =
-            Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
-                .build()
-        val yelpService = retrofit.create(YelpService::class.java)
-        //"Avocado Toast"
-        yelpService.searchRestaurants("Bearer $API_KEY", "40.814564", "-74.220654").enqueue(object : Callback<YelpSearchResult> {
-            override fun onResponse(call: Call<YelpSearchResult>, response: Response<YelpSearchResult>) {
-                Log.i(TAG, "onResponse $response")
-                val body = response.body()
-                if (body == null) {
-                    Log.w(TAG, "Did not receive valid response body from Yelp API... exiting")
-                    return
-                }
-                restaurants.addAll(body.restaurants)
-                adapter.notifyDataSetChanged()
-            }
-
-            override fun onFailure(call: Call<YelpSearchResult>, t: Throwable) {
-                Log.i(TAG, "onFailure $t")
-            }
-        })
-         */
-        val retrofit = Retrofit.Builder().baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create()).build()
-        val weatherInterface = retrofit.create(WeatherInterface::class.java)
-        weatherInterface.getCurrentWeather(API_KEY,"40.777272,-74.269483").enqueue(object : Callback<Weather>{
-            override fun onFailure(call: Call<Weather>, t: Throwable) {
-                Log.i(TAG, "onFailure $t")
-            }
-
-            override fun onResponse(call: Call<Weather>, response: Response<Weather>) {
-                Log.i(TAG, "onResponse $response")
-                val body = response.body()
-                weather = response.body()!!
-
-                val address = view.findViewById<TextView>(R.id.address)
-                address.text = weather.location.country.toString()
-                if (body == null) {
-                    Log.w(TAG, "Did not receive valid response body from Weather API... exiting")
-                    return
-                }
-            }
-
-        })
-
-
-
+        //val address = view.findViewById<TextView>(R.id.address)
+        weatherViewModel.getCurrentWeather(API_KEY,"40.777272,-74.269483").observe(viewLifecycleOwner,
+            Observer {
+                Log.i(TAG,"${it.location.country}")
+            })
 
         return view
     }

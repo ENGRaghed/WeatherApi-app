@@ -1,4 +1,4 @@
-package com.bignerdranch.android.weatherapiapp
+package com.bignerdranch.android.weatherapiapp.model
 
 
 /*
@@ -44,14 +44,16 @@ package com.bignerdranch.android.weatherapiapp
     }
 }
  */
-data class Weather (val location: LocationWeather,val current: current)
+data class Weather (val location: LocationWeather, val current: current)
+
+
+
 data class LocationWeather(val name:String,
 val region: String,
 val country: String,
 val lat: String,
 val lon: String,
 val tz_id: String,
-//val localtime_epoch: String,
 val localtime: String)
 
 data class current(val last_updated: String,
@@ -75,8 +77,8 @@ data class current(val last_updated: String,
                    val uv: Double,
                    val gust_mph: Double,
                    val gust_kph: Double,
-                   val condition: Condition)
+                   val condition: Condition
+)
 
-data class Condition( val text: String,
-val icon: String)
+data class Condition( val text: String, val icon: String)
 

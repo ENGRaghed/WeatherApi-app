@@ -1,5 +1,7 @@
 package com.bignerdranch.android.weatherapiapp.model
 
+import com.google.gson.annotations.SerializedName
+
 
 /*
 {
@@ -44,41 +46,68 @@ package com.bignerdranch.android.weatherapiapp.model
     }
 }
  */
-data class Weather (val location: LocationWeather, val current: current)
+data class Weather (var location: LocationWeather, var current: current)
 
 
 
-data class LocationWeather(val name:String,
-val region: String,
-val country: String,
-val lat: String,
-val lon: String,
-val tz_id: String,
-val localtime: String)
-
-data class current(val last_updated: String,
-                   val temp_c: Double,
-                   val temp_f: Double,
-                   val is_day: Int,
-                   val wind_mph: Double,
-                   val wind_kph: Double,
-                   val wind_degree: Double,
-                   val wind_dir: String,
-                   val pressure_mb: Double,
-                   val pressure_in: Double,
-                   val precip_mm: Double,
-                   val precip_in: Double,
-                   val humidity: Double,
-                   val cloud: Double,
-                   val feelslike_c: Double,
-                   val feelslike_f: Double,
-                   val vis_km: Double,
-                   val vis_miles: Double,
-                   val uv: Double,
-                   val gust_mph: Double,
-                   val gust_kph: Double,
-                   val condition: Condition
+data class LocationWeather(val name:String="",
+var region: String="",
+var country: String="",
+var lat: String="",
+var lon: String="",
+var tz_id: String="",
+var localtime: String=""
 )
 
-data class Condition( val text: String, val icon: String)
+data class current(var last_updated: String,
+                   var temp_c: Double,
+                   var temp_f: Double,
+                   var is_day: Int,
+                   var wind_mph: Double,
+                   var wind_kph: Double,
+                   var wind_degree: Double,
+                   var wind_dir: String,
+                   var pressure_mb: Double,
+                   var pressure_in: Double,
+                   var precip_mm: Double,
+                   var precip_in: Double,
+                   var humidity: Double,
+                   var cloud: Double,
+                   var feelslike_c: Double,
+                   var feelslike_f: Double,
+                   var vis_km: Double,
+                   var vis_miles: Double,
+                   var uv: Double,
+                   var gust_mph: Double,
+                   var gust_kph: Double,
+                   var condition: Condition
+)
 
+data class Condition( var text: String, var icon: String)
+
+//
+//data class Weather(
+//    var is_day: Int,
+//    var wind_mph: Double,
+//    var wind_kph: Double,
+//    var wind_degree: Double,
+//    var wind_dir: String,
+//    var pressure_mb: Double,
+//    var pressure_in: Double,
+//    var precip_mm: Double,
+//    var precip_in: Double,
+//    var humidity: Double,
+//    var cloud: Double,
+//    var feelslike_c: Double,
+//    var feelslike_f: Double,
+//    var vis_km: Double,
+//    var vis_miles: Double,
+//    var uv: Double,
+//    var gust_mph: Double,
+//    var gust_kph: Double,
+//    val temp_c: Double,
+//    val temp_f: Double,
+//    val condition: WeatherCondition)
+//data class WeatherCondition(
+//    val text: String,
+//    val icon: String)

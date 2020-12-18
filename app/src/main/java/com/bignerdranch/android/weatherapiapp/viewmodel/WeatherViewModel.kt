@@ -5,9 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bignerdranch.android.weatherapiapp.ServiceLocator
-import com.bignerdranch.android.weatherapiapp.model.LocationWeather
 import com.bignerdranch.android.weatherapiapp.model.Weather
-import com.bignerdranch.android.weatherapiapp.model.current
 import kotlinx.coroutines.launch
 
 class WeatherViewModel : ViewModel(){
@@ -21,20 +19,30 @@ class WeatherViewModel : ViewModel(){
 //        return weather
 //    }
 
-    fun getCurrentWeather(key : String,latlon : String):LiveData<current>{
-        val current = MutableLiveData<current>()
+
+    fun getCurrentWeather(key : String,latlon : String):LiveData<Weather>{
+        val weather = MutableLiveData<Weather>()
         viewModelScope.launch {
-            current.value = weatherRepository.getWeather(key,latlon)
+            weather.value = weatherRepository.getWeather(key,latlon)
         }
-        return current
+        return weather
     }
 
-    fun getCurrentWeatherLocation(key : String,latlon : String):LiveData<LocationWeather>{
-        var location = MutableLiveData<LocationWeather>()
-        viewModelScope.launch {
-            location.value = weatherRepository.getWeatherLocation(key,latlon)
-        }
-        return location
-    }
+
+//    fun getCurrentWeather(key : String,latlon : String):LiveData<current>{
+//        val current = MutableLiveData<current>()
+//        viewModelScope.launch {
+//            current.value = weatherRepository.getWeather(key,latlon)
+//        }
+//        return current
+//    }
+//
+//    fun getCurrentWeatherLocation(key : String,latlon : String):LiveData<LocationWeather>{
+//        var location = MutableLiveData<LocationWeather>()
+//        viewModelScope.launch {
+//            location.value = weatherRepository.getWeatherLocation(key,latlon)
+//        }
+//        return location
+//    }
 
 }

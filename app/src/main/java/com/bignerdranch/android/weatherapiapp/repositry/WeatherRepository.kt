@@ -9,15 +9,20 @@ private const val TAG = "WeatherFetchr"
 
 class WeatherRepository ( private val weatherApi: WeatherInterface ){
 
-    suspend fun getWeather(key: String,latlon : String): current {
+        suspend fun getWeather(key: String,latlon : String): Weather {
 //        return flickrApi.searchByLocationPhotosWithDomain(lat, lon, radius).photos.photos
-        return weatherApi.getCurrentWeather(key,latlon).current
+        return weatherApi.getCurrentWeather(key,latlon)
     }
 
-    suspend fun getWeatherLocation(key: String,latlon : String): LocationWeather {
-//        return flickrApi.searchByLocationPhotosWithDomain(lat, lon, radius).photos.photos
-        return weatherApi.getCurrentWeather(key,latlon).location
-    }
+//    suspend fun getWeather(key: String,latlon : String): current {
+////        return flickrApi.searchByLocationPhotosWithDomain(lat, lon, radius).photos.photos
+//        return weatherApi.getCurrentWeather(key,latlon).current
+//    }
+
+//    suspend fun getWeatherLocation(key: String,latlon : String): LocationWeather {
+////        return flickrApi.searchByLocationPhotosWithDomain(lat, lon, radius).photos.photos
+//        return weatherApi.getCurrentWeather(key,latlon).location
+//    }
 
 
 }

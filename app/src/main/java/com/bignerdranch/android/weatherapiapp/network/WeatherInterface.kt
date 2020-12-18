@@ -10,5 +10,5 @@ import retrofit2.http.Query
 interface WeatherInterface {
     @GET("current.json?")
     suspend fun getCurrentWeather(@Query("key") authHeader: String,
-                          @Query("q") latlon:String) : WeatherResponse
+                          @Query("q") latlon:String) : Weather
 }

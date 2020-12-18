@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/weather_api_nav"
-    app:startDestination="@id/weatherPageFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/weather_api_nav"
+    app:startDestination="@id/weatherMapFragment">
 
     <fragment
         android:id="@+id/weatherPageFragment"
         android:name="com.bignerdranch.android.weatherapiapp.WeatherPageFragment"
-        android:label="WeatherPageFragment" />
+        android:label="WeatherPageFragment" >
+        <action
+            android:id="@+id/action_weatherPageFragment_to_weatherMapFragment"
+            app:destination="@id/weatherMapFragment" />
+        <argument android:name="location"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/weatherMapFragment"
+        android:name="com.bignerdranch.android.weatherapiapp.WeatherMapFragment"
+        android:label="fragment_weather_map"
+        tools:layout="@layout/fragment_weather_map" >
+        <action
+            android:id="@+id/action_weatherMapFragment_to_weatherPageFragment"
+            app:destination="@id/weatherPageFragment" />
+    </fragment>
 </navigation>

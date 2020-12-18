@@ -6,11 +6,11 @@ import com.bignerdranch.android.weatherapiapp.model.current
 import com.google.gson.annotations.SerializedName
 
 class WeatherResponse {
-    @SerializedName("current")
-    lateinit var current: current
-
-    @SerializedName("location")
-    lateinit var location : LocationWeather
+//    @SerializedName("current")
+//    lateinit var current: current
+//
+//    @SerializedName("location")
+//    lateinit var location : LocationWeather
 
 //    @SerializedName("location")
 //    lateinit var s: LocationWeather

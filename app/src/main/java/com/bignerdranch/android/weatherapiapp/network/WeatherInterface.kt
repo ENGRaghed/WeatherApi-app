@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 //http://api.weatherapi.com/v1/current.json?key=843eaebc6a294b4593b190359201612&q=40.777272, -74.269483
 interface WeatherInterface {
-    @GET("current.json?")
+    @GET("forecast.json?")
     suspend fun getCurrentWeather(@Query("key") authHeader: String,
-                          @Query("q") latlon:String) : Weather
+                          @Query("q") latlon:String , @Query("days") days : String) : Weather
 }

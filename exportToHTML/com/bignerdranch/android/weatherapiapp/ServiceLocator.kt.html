@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>ServiceLocator.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ServiceLocator.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.bignerdranch.android.weatherapiapp</span>
+
+<span class="s1">import android.content.Context</span>
+<span class="s1">import com.bignerdranch.android.weatherapiapp.network.WeatherInterface</span>
+<span class="s1">import com.bignerdranch.android.weatherapiapp.repositry.WeatherRepository</span>
+<span class="s1">import retrofit2.Retrofit</span>
+<span class="s1">import retrofit2.converter.gson.GsonConverterFactory</span>
+
+<span class="s0">object </span><span class="s1">ServiceLocator {</span>
+
+
+    <span class="s1">private lateinit </span><span class="s0">var </span><span class="s1">app: App</span>
+    <span class="s1">lateinit </span><span class="s0">var </span><span class="s1">retrofit: Retrofit</span>
+    <span class="s1">lateinit </span><span class="s0">var </span><span class="s1">weatherApi: WeatherInterface</span>
+
+    <span class="s0">fun </span><span class="s1">init(app: App) {</span>
+        <span class="s0">this</span><span class="s1">.app = app</span>
+        <span class="s1">initializeNetwork(app)</span>
+    <span class="s1">}</span>
+
+
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">initializeNetwork(context: Context) {</span>
+        <span class="s1">retrofit = Retrofit.Builder()</span>
+            <span class="s1">.baseUrl(</span><span class="s2">&quot;https://api.weatherapi.com/v1/&quot;</span><span class="s1">)</span>
+            <span class="s1">.addConverterFactory(GsonConverterFactory.create())</span>
+            <span class="s1">.build()</span>
+
+        <span class="s1">weatherApi = retrofit.create(WeatherInterface::</span><span class="s0">class</span><span class="s1">.java)</span>
+    <span class="s1">}</span>
+
+    <span class="s0">val </span><span class="s1">weatherRepository: WeatherRepository by lazy {</span>
+        <span class="s1">WeatherRepository(weatherApi)</span>
+    <span class="s1">}</span>
+
+
+
+<span class="s1">}</span></pre>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>App.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+App.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.bignerdranch.android.weatherapiapp</span>
+
+<span class="s1">import android.app.Application</span>
+
+<span class="s0">class </span><span class="s1">App : Application() {</span>
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreate() {</span>
+        <span class="s0">super</span><span class="s1">.onCreate()</span>
+        <span class="s1">ServiceLocator.init(</span><span class="s0">this</span><span class="s1">)</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

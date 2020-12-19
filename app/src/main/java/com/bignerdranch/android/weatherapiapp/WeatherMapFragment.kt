@@ -31,7 +31,7 @@ class WeatherMapFragment : Fragment() {
         googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
 
-        googleMap.setOnMapLongClickListener {
+        googleMap.setOnMapClickListener {
             val action = WeatherMapFragmentDirections
                     .actionWeatherMapFragmentToWeatherPageFragment("${it.latitude},${it.longitude}")
             findNavController().navigate(action)

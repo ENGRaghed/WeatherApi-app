@@ -1,8 +1,8 @@
 package com.bignerdranch.android.weatherapiapp.network
 
-import com.bignerdranch.android.weatherapiapp.model.LocationWeather
+//import com.bignerdranch.android.weatherapiapp.model.LocationWeather
 import com.bignerdranch.android.weatherapiapp.model.Weather
-import com.bignerdranch.android.weatherapiapp.model.current
+//import com.bignerdranch.android.weatherapiapp.model.current
 import com.google.gson.annotations.SerializedName
 
 class WeatherResponse {

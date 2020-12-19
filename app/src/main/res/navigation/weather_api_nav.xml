@@ -5,7 +5,7 @@
     android:id="@+id/weather_api_nav"
     app:startDestination="@id/weatherMapFragment">
 
-    <fragment
+    <dialog
         android:id="@+id/weatherPageFragment"
         android:name="com.bignerdranch.android.weatherapiapp.WeatherPageFragment"
         android:label="WeatherPageFragment" >
@@ -14,7 +14,7 @@
             app:destination="@id/weatherMapFragment" />
         <argument android:name="location"
             app:argType="string" />
-    </fragment>
+    </dialog>
     <fragment
         android:id="@+id/weatherMapFragment"
         android:name="com.bignerdranch.android.weatherapiapp.WeatherMapFragment"

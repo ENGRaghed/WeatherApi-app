@@ -1,0 +1,97 @@
+<html>
+<head>
+<title>WeatherPageFragment.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+WeatherPageFragment.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.bignerdranch.android.weatherapiapp</span>
+
+<span class="s1">import android.annotation.SuppressLint</span>
+<span class="s1">import android.os.Bundle</span>
+<span class="s1">import android.util.Log</span>
+<span class="s1">import androidx.fragment.app.Fragment</span>
+<span class="s1">import android.view.LayoutInflater</span>
+<span class="s1">import android.view.View</span>
+<span class="s1">import android.view.ViewGroup</span>
+<span class="s1">import android.widget.TextView</span>
+<span class="s1">import androidx.lifecycle.Observer</span>
+<span class="s1">import androidx.lifecycle.ViewModelProvider</span>
+<span class="s1">import androidx.navigation.fragment.navArgs</span>
+<span class="s2">//import com.bignerdranch.android.weatherapiapp.model.LocationWeather</span>
+<span class="s2">//import com.bignerdranch.android.weatherapiapp.model.current</span>
+<span class="s1">import com.bignerdranch.android.weatherapiapp.viewmodel.WeatherViewModel</span>
+<span class="s1">import com.google.android.material.bottomsheet.BottomSheetDialogFragment</span>
+
+<span class="s1">private const </span><span class="s0">val </span><span class="s1">TAG = </span><span class="s3">&quot;WeatherPageFragment&quot;</span>
+<span class="s1">private const </span><span class="s0">val </span><span class="s1">BASE_URL = </span><span class="s3">&quot;https://api.weatherapi.com/v1/&quot;</span>
+<span class="s1">private const </span><span class="s0">val </span><span class="s1">API_KEY = </span><span class="s3">&quot;843eaebc6a294b4593b190359201612&quot;</span>
+
+
+<span class="s0">class </span><span class="s1">WeatherPageFragment : BottomSheetDialogFragment() {</span>
+    <span class="s1">private lateinit </span><span class="s0">var  </span><span class="s1">weatherViewModel: WeatherViewModel</span>
+<span class="s2">//    private  var current: current? = null</span>
+<span class="s2">//    private  var locationWeather: LocationWeather = LocationWeather()</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">args  by navArgs&lt;WeatherPageFragmentArgs&gt;()</span>
+
+
+    <span class="s1">@SuppressLint(</span><span class="s3">&quot;SetTextI18n&quot;</span><span class="s1">)</span>
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreateView(</span>
+        <span class="s1">inflater: LayoutInflater</span><span class="s0">, </span><span class="s1">container: ViewGroup?</span><span class="s0">,</span>
+        <span class="s1">savedInstanceState: Bundle?</span>
+    <span class="s1">): View? {</span>
+        <span class="s2">// Inflate the layout for this fragment</span>
+        <span class="s0">val </span><span class="s1">view = inflater.inflate(R.layout.fragment_weather_page</span><span class="s0">, </span><span class="s1">container</span><span class="s0">, false</span><span class="s1">)</span>
+
+
+        <span class="s1">weatherViewModel= ViewModelProvider(</span><span class="s0">this</span><span class="s1">).get(WeatherViewModel::</span><span class="s0">class</span><span class="s1">.java)</span>
+
+        <span class="s0">val </span><span class="s1">address_tv = view.findViewById&lt;TextView&gt;(R.id.address)</span>
+        <span class="s0">val </span><span class="s1">status_tv = view.findViewById&lt;TextView&gt;(R.id.status)</span>
+        <span class="s0">val </span><span class="s1">updatedAt_tv = view.findViewById&lt;TextView&gt;(R.id.updated_at)</span>
+        <span class="s0">val </span><span class="s1">temp_tv = view.findViewById&lt;TextView&gt;(R.id.temp)</span>
+        <span class="s0">val </span><span class="s1">temp_max_tv= view.findViewById&lt;TextView&gt;(R.id.temp_max)</span>
+        <span class="s0">val </span><span class="s1">temp_min_tv = view.findViewById&lt;TextView&gt;(R.id.temp_min)</span>
+        <span class="s0">val </span><span class="s1">day1 = view.findViewById&lt;TextView&gt;(R.id.wind)</span>
+        <span class="s0">val </span><span class="s1">day2 = view.findViewById&lt;TextView&gt;(R.id.sunset)</span>
+        <span class="s0">val </span><span class="s1">day3 = view.findViewById&lt;TextView&gt;(R.id.sunrise)</span>
+
+
+
+<span class="s2">//&quot;40.777272,-74.269483&quot;</span>
+        <span class="s1">weatherViewModel.getCurrentWeather(API_KEY</span><span class="s0">,</span><span class="s1">args.location</span><span class="s0">,</span><span class="s3">&quot;5&quot;</span><span class="s1">)</span>
+                <span class="s1">.observe(viewLifecycleOwner</span><span class="s0">, </span><span class="s1">Observer {</span>
+                    <span class="s0">if</span><span class="s1">(it == </span><span class="s0">null</span><span class="s1">){</span>
+                        <span class="s2">//do nothing</span>
+                    <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+                        <span class="s1">Log.i(TAG</span><span class="s0">,</span><span class="s3">&quot;</span><span class="s0">${</span><span class="s1">it</span><span class="s0">}</span><span class="s3">&quot;</span><span class="s1">)</span>
+                        <span class="s1">status_tv.text = it.current.condition.text</span>
+                        <span class="s1">updatedAt_tv.text = it.current.last_updated</span>
+                        <span class="s1">temp_tv.text = </span><span class="s3">&quot;</span><span class="s0">${</span><span class="s1">it.current.temp_c</span><span class="s0">}</span><span class="s3">°C&quot;</span>
+                        <span class="s1">address_tv.text = it.location.country</span>
+                        <span class="s1">day1.text = </span><span class="s3">&quot;</span><span class="s0">${</span><span class="s1">it.forecast.forecastday[</span><span class="s4">0</span><span class="s1">].day.avgtemp_c</span><span class="s0">}</span><span class="s3">°C&quot;</span>
+                        <span class="s1">day2.text = </span><span class="s3">&quot;</span><span class="s0">${</span><span class="s1">it.forecast.forecastday[</span><span class="s4">1</span><span class="s1">].day.avgtemp_c</span><span class="s0">}</span><span class="s3">°C&quot;</span>
+                        <span class="s1">day3.text = </span><span class="s3">&quot;</span><span class="s0">${</span><span class="s1">it.forecast.forecastday[</span><span class="s4">2</span><span class="s1">].day.avgtemp_c</span><span class="s0">}</span><span class="s3">°C&quot;</span>
+
+                    <span class="s1">}</span>
+
+                <span class="s1">})</span>
+
+
+        <span class="s0">return </span><span class="s1">view</span>
+    <span class="s1">}</span>
+    
+<span class="s1">}</span></pre>
+</body>
+</html>
